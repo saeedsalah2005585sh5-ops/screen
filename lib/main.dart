@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:untitled4/screen/drawer_screen.dart';
 import 'package:untitled4/screen/grid_view_builder_screen.dart';
 import 'package:untitled4/screen/image.dart';
 import 'package:untitled4/screen/list_view_builder_screen.dart';
 import 'package:untitled4/screen/list_view_screen.dart';
 import 'package:untitled4/screen/login_screen.dart';
 import 'package:untitled4/screen/sign_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-void main() {
-  runApp(const MyApp());
+
+Future<void > main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en'), Locale('ar')],
+        path: 'assets/translations',
+        fallbackLocale: Locale('en'),
+        child: MyApp()
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -37,7 +49,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Images(),
+      home: DrawerScreen(),
     );
   }
 }
